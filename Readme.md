@@ -1,6 +1,7 @@
 # 本地socks代理
 ## 本项目是为了爬虫而在本地启动的代理池,从网上搜集的[订阅节点合成](https://github.com/tindy2013/subconverter/releases)，每一个节点起一个代理端口
 
+### 代码无法访问github的(https://github.com/maxiaof/github-hosts)
 ### [订阅转换工具](https://github.com/tindy2013/subconverter/releases)
 ### [v2rayN中的clash-mata内核](https://github.com/2dust/v2rayN)(避免进程名冲突重命名为socks_pool_start.exe)
 
