@@ -1,0 +1,129 @@
+allow-lan: true
+dns:
+  enable: true
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  default-nameserver:
+    - 114.114.114.114
+  nameserver:
+    - https://doh.pub/dns-query
+listeners:
+  - name: mixed0
+    type: mixed
+    port: 11811
+    proxy: 🇫🇷 fr-Vm
+  - name: mixed1
+    type: mixed
+    port: 21812
+    proxy: cf_ac
+  - name: mixed2
+    type: mixed
+    port: 21813
+    proxy: hax_tls
+  - name: mixed3
+    type: mixed
+    port: 21814
+    proxy: wh0114-3k.wangh0011.workers.dev
+  - name: mixed4
+    type: mixed
+    port: 21815
+    proxy: wh0114-3k.wangh0011.workers.dev 2
+  - name: mixed5
+    type: mixed
+    port: 21816
+    proxy: bot-hosting
+proxies:
+  - name: 🇫🇷 fr-Vm
+    server: 104.16.18.37
+    port: 443
+    client-fingerprint: chrome
+    type: vmess
+    uuid: 7edae09a-1686-458a-a563-8191c73004cc
+    alterId: 0
+    cipher: auto
+    tls: true
+    tfo: false
+    skip-cert-verify: false
+    servername: institutes-palestinian-buck-expression.trycloudflare.com
+    network: ws
+    ws-opts:
+      path: /argox-vm?ed=2048
+      headers:
+        Host: institutes-palestinian-buck-expression.trycloudflare.com
+  - name: cf_ac
+    server: cm.xxxxxxxx.tk
+    port: 8080
+    client-fingerprint: chrome
+    type: vmess
+    uuid: 0eb63dcb-e31d-460d-b23f-13a15fe503fb
+    alterId: 0
+    cipher: auto
+    tls: false
+    tfo: false
+    skip-cert-verify: false
+    network: ws
+    ws-opts:
+      path: /wss
+      headers:
+        Host: ac.whixj.top
+  - name: hax_tls
+    server: cm.xxxxxxxx.tk
+    port: 443
+    client-fingerprint: chrome
+    type: vmess
+    uuid: 68345878-af97-4eab-880a-8e862dd0cefe
+    alterId: 0
+    cipher: auto
+    tls: true
+    tfo: false
+    skip-cert-verify: false
+    servername: hax.whixj.top
+    network: ws
+    ws-opts:
+      path: /sssss
+      headers:
+        Host: hax.whixj.top
+  - name: wh0114-3k.wangh0011.workers.dev
+    server: www.gov.se
+    port: 8443
+    client-fingerprint: chrome
+    type: vless
+    uuid: b71001b2-2cb0-4993-9246-f047fca709b3
+    tls: true
+    tfo: false
+    skip-cert-verify: false
+    servername: cfwk2.whixj.top
+    network: ws
+    ws-opts:
+      path: /?ed=2048
+      headers:
+        Host: cfwk2.whixj.top
+  - name: wh0114-3k.wangh0011.workers.dev 2
+    server: www.visa.com
+    port: 8880
+    client-fingerprint: chrome
+    type: vless
+    uuid: b71001b2-2cb0-4993-9246-f047fca709b3
+    tls: false
+    tfo: false
+    skip-cert-verify: false
+    network: ws
+    ws-opts:
+      path: /?ed=2048
+      headers:
+        Host: wh0114-3k.wangh0011.workers.dev
+  - name: bot-hosting
+    server: 104.16.18.37
+    port: 8080
+    client-fingerprint: chrome
+    type: vless
+    uuid: 3206f9eb-efba-4f54-8bd3-ba03f578e9b8
+    tls: false
+    tfo: false
+    skip-cert-verify: false
+    servername: bot.whixj.top
+    network: ws
+    ws-opts:
+      path: /
+      headers:
+        Host: bot.whixj.top
