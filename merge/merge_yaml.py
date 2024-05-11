@@ -18,16 +18,18 @@ def update_agent():
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
     }
     from datetime import datetime
-    # 获取当前日期
     current_date = datetime.now()
     formatted_date = current_date.strftime('%Y%m%d')
-    print(formatted_date)
+    # print(formatted_date)
     url = [
         f'https://clashgithub.com/wp-content/uploads/rss/{formatted_date}.txt',
         #    'https://freenode.me/wp-content/uploads/2024/03/0321.yaml',
         'https://tt.vg/freeclash',
         'https://raw.githubusercontent.com/aiboboxx/v2rayfree/main/v2',
-        'https://proxy.v2gh.com/https://raw.githubusercontent.com/Pawdroid/Free-servers/main/sub'
+        'https://proxy.v2gh.com/https://raw.githubusercontent.com/Pawdroid/Free-servers/main/sub',
+        'https://dash.ftclashcloud.mom/api/v1/client/subscribe?token=e3e24483bb56a4309d78f76aee4e246b',
+        'https://proxy.v2gh.com/https://raw.githubusercontent.com/Pawdroid/Free-servers/main/sub',
+        'https://cainiao164.top/api/v1/client/subscribe?token=5d7dc49e53b48b7fa46a9791f8ab2d21',
     ]
     for index, u in enumerate(url):
         log_console(u)
