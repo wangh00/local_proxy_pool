@@ -48,12 +48,12 @@ class ThreadPool:
 def check_task(pro_list, d):
     # print(f'{pro_list}+{d}')
     def get():
-        res = requests.get('https://api.myip.la/en?json', headers=head, proxies={'https': d}, timeout=20).json()
+        res = requests.get('https://api.ip.sb/ip', headers=head, proxies={'https': d}, timeout=20).text
         #https://api.ip.sb/geoip
         # print(res.text)
         return res
 
-    count = pro_list[d][0]
+    count = pro_list[d]['count']
     try:
         while True:
             try:
@@ -86,7 +86,7 @@ def check(proxy_result):
             pass
             # proxy_result[proxy][0] += 1
         else:
-            proxy_result.update({proxy: [0, '']})
+            proxy_result.update({proxy: {'count': 0, 'IpAddress': ''}})
     log_console(f'开始检测{len(proxy_result.keys())}个代理')
     for d in dict(proxy_result):
         pool.add_task(check_task, args=(proxy_result, d))

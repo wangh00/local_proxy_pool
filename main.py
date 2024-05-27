@@ -14,11 +14,11 @@ from merge.merge_yaml import update_agent, merge_yaml
 
 
 app = Flask(__name__)
-proxys = ['socks5://192.168.1.190:1089', 'socks5://192.168.1.190:1091', 'socks5://192.168.1.190:7897',
+proxys = ['socks5://192.168.1.190:1089'
           'socks5://192.168.1.190:10808',
           'socks5://192.168.1.102:10808',
           'socks5://192.168.1.131:10808', 'socks5://192.168.1.190:10810']
-format_proxy_result = {x: [0, ''] for x in proxys}
+format_proxy_result = {x:{'count': 0, 'IpAddress': ''} for x in proxys}
 if not find_process('socks_pool_start.exe'):
     print('start pool--')
     start_or_stop_background_service(start_or_stop='start')
@@ -41,7 +41,7 @@ def scheduled_task():
         if proxy_result.get(d):
             pass
         else:
-            proxy_result.update({d: [0, '']})
+            proxy_result.update({d: {'count': 0, 'IpAddress': ''}})
     proxy_result = check(proxy_result)
     formatted_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
@@ -84,10 +84,10 @@ def get_proxy_result():
     seen_values = set()
     keys_to_remove = []
     for key, value in proxy_result.items():
-        if value['IpAddress']['ip'] in seen_values:
+        if value['IpAddress'] in seen_values:
             keys_to_remove.append(key)
         else:
-            seen_values.add(value['IpAddress']['ip'])
+            seen_values.add(value['IpAddress'])
     if len(keys_to_remove) != 0:
         print(f'Number of duplicate nodes:{len(keys_to_remove)}')
     for key in keys_to_remove:
@@ -102,7 +102,7 @@ def sorted_proxy():
     data_list = []
     for key, value in pool.items():
         # print(d)
-        number, ip = value['count'], value['address']
+        number, ip = value['count'], value['IpAddress']
         data = {key: number}
         data_list.append(data)
     sorted_data_list = sorted(data_list, key=lambda x: list(x.values())[0], reverse=True)
