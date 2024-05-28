@@ -42,7 +42,8 @@ class ThreadPool:
 
     def wait_done(self):
         self._add_close_signal()
-        wait(self.future_list)
+        done, not_done=wait(self.future_list,timeout=60*10)
+        print('error task:',len(not_done))
 
 
 def check_task(pro_list, d):
