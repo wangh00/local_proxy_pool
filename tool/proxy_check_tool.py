@@ -59,7 +59,7 @@ def check_task(pro_list, d):
         while True:
             try:
                 myip = get()
-                if not myip:
+                if 'api.ip.sb' in myip:
                     raise AttributeError
                 else:
                     print(f'{d}:{myip}')
