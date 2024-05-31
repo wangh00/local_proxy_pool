@@ -90,7 +90,7 @@ def get_proxy_result():
         print(f'Number of duplicate nodes:{len(keys_to_remove)}')
     for key in keys_to_remove:
         del proxy_result[key]
-    return jsonify({'proxy_pool': proxy_result, '最后一次更新时间': current_time.strftime("%Y-%m-%d %H:%M:%S"), '程序开始运行时间': current_time.strftime("%Y-%m-%d %H:%M:%S")})
+    return jsonify({'proxy_pool': proxy_result, '最后一次更新时间': formatted_time, '程序开始运行时间': start_time})
 
 
 @app.route('/sort')
