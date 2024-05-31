@@ -27,7 +27,6 @@ def update_agent():
         'https://tt.vg/freeclash',
         'https://raw.githubusercontent.com/aiboboxx/v2rayfree/main/v2',
         'https://proxy.v2gh.com/https://raw.githubusercontent.com/Pawdroid/Free-servers/main/sub',
-        'https://cainiao164.top/api/v1/client/subscribe?token=5d7dc49e53b48b7fa46a9791f8ab2d21',
     ]
     for index, u in enumerate(url):
         log_console(u)

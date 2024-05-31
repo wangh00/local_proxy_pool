@@ -1,6 +1,5 @@
 import os
 import time
-
 import requests
 from tool.proxy_check_tool import check_no_queue
 from flask import Flask, jsonify, request
@@ -50,28 +49,28 @@ def update_proxy():
     check_yaml_path_is_update = 'merge/yaml_list/0.yaml'
     mtime = os.path.getmtime(check_yaml_path_is_update)
     update_time = datetime.fromtimestamp(mtime)
-    if update_time.date() == datetime.now().date():
-        print('Get a new yaml file')
-        update_agent()
-        print('Synthesize yaml files')
-        merge_yaml()
-        time.sleep(3)
-        print('Find the running proxy pool and close it')
-        pid = find_process('socks_pool_start.exe')
-        if pid:
-            start_or_stop_background_service(start_or_stop='stop')
-            print('Successfully closed proxy pool')
-        else:
-            print('Process not found, start socks proxy pool directly')
-        time.sleep(3)
-        print('Start the bat program')
-        start_or_stop_background_service(start_or_stop='start')
-        proxy_result = check_no_queue(format_proxy_result)
-        current_time = datetime.now()
+    # if update_time.date() == datetime.now().date():
+    print('Get a new yaml file')
+    update_agent()
+    print('Synthesize yaml files')
+    merge_yaml()
+    time.sleep(3)
+    print('Find the running proxy pool and close it')
+    pid = find_process('socks_pool_start.exe')
+    if pid:
+        start_or_stop_background_service(start_or_stop='stop')
+        print('Successfully closed proxy pool')
+    else:
+        print('Process not found, start socks proxy pool directly')
+    time.sleep(3)
+    print('Start the bat program')
+    start_or_stop_background_service(start_or_stop='start')
+    proxy_result = check_no_queue(format_proxy_result)
+    current_time = datetime.now()
 
 
 scheduler = BackgroundScheduler()
-scheduler.add_job(scheduled_task, trigger=IntervalTrigger(minutes=30))
+scheduler.add_job(scheduled_task, trigger=IntervalTrigger(minutes=40))
 scheduler.add_job(update_proxy, 'cron', hour=16, minute=55)
 scheduler.start()
 atexit.register(lambda: shutdown_scheduler())
