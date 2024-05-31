@@ -74,7 +74,23 @@ def check_task(pro_list, d):
         del pro_list[d]
     time.sleep(1)
 
-
+def check_no_queue(proxy_result):
+    ports=find_udp_ports_in_range()
+    my_ip = get_local_ip()
+    my_ip = my_ip if my_ip else '127.0.0.1'
+    for d in ports:
+        proxy = f'{my_ip}:{d}'
+        if proxy_result.get(proxy):
+            pass
+            # proxy_result[proxy][0] += 1
+        else:
+            proxy_result.update({proxy: {'count': 0, 'IpAddress': '暂无'}})
+    with ThreadPoolExecutor(16) as pool:
+        log_console(f'开始检测{len(proxy_result.keys())}个代理')
+        for d in proxy_result:
+            pool.submit(check_task, proxy_result, d)
+    log_console(('END:', proxy_result))
+    return proxy_result
 def check(proxy_result):
     pool = ThreadPool(8)
     ports = find_udp_ports_in_range()

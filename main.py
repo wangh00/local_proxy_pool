@@ -2,8 +2,7 @@ import os
 import time
 
 import requests
-from apscheduler.triggers.cron import CronTrigger
-from tool.proxy_check_tool import check
+from tool.proxy_check_tool import check_no_queue
 from flask import Flask, jsonify, request
 from apscheduler.triggers.interval import IntervalTrigger
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -23,7 +22,7 @@ if not find_process('socks_pool_start.exe'):
     print('start pool--')
     start_or_stop_background_service(start_or_stop='start')
     time.sleep(2)
-proxy_result = check(format_proxy_result)
+proxy_result = check_no_queue(format_proxy_result)
 current_time = datetime.now()
 formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
 start_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
@@ -42,7 +41,7 @@ def scheduled_task():
             pass
         else:
             proxy_result.update({d: {'count': 0, 'IpAddress': ''}})
-    proxy_result = check(proxy_result)
+    proxy_result = check_no_queue(proxy_result)
     formatted_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 
@@ -67,7 +66,7 @@ def update_proxy():
         time.sleep(3)
         print('Start the bat program')
         start_or_stop_background_service(start_or_stop='start')
-        proxy_result = check(format_proxy_result)
+        proxy_result = check_no_queue(format_proxy_result)
         current_time = datetime.now()
 
 
