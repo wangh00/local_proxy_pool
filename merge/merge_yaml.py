@@ -32,9 +32,10 @@ def update_agent():
         log_console(u)
         try:
             res = requests_cuff.get(u, impersonate='chrome104', headers=headers)
-        except Exception:
-            res = requests_cuff.get(u, impersonate='chrome104', verify=False, headers=headers,
-                                    proxies={'https': 'http://127.0.0.1:1090'})
+        except TimeoutError as e:
+            print(u,'请求报错,需要获取的链接可能被墙了,请设置代理重试:',e)
+            continue
+        if res.status_code != 200: print(f'{u} 当前订阅地址无效返回:{res.status_code}')
         path = f'merge/yaml_list/{index + 1}.yaml'
         with open(path, 'w', encoding='utf-8') as f:
             f.write(res.text)
