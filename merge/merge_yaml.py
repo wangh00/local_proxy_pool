@@ -2,6 +2,9 @@ import os
 import subprocess
 import time
 from sys import stdout
+from traceback import print_exc
+
+import curl_cffi
 import execjs
 import urllib.parse
 from curl_cffi import requests as requests_cuff
@@ -32,8 +35,11 @@ def update_agent():
         log_console(u)
         try:
             res = requests_cuff.get(u, impersonate='chrome104', headers=headers)
-        except TimeoutError as e:
-            print(u,'请求报错,需要获取的链接可能被墙了,请设置代理重试:',e)
+        except curl_cffi.curl.CurlError as e:
+            print(u,'请求报错,需要获取的链接可能被墙了,设置代理重试:',e)
+            res = requests_cuff.get(u, impersonate='chrome104', headers=headers,verify=False,proxies={'http':'socks5://127.0.0.1:1089','https':'socks5://127.0.0.1:1089'})
+        except Exception as e:
+            print_exc()
             continue
         if res.status_code != 200: print(f'{u} 当前订阅地址无效返回:{res.status_code}')
         path = f'merge/yaml_list/{index + 1}.yaml'
