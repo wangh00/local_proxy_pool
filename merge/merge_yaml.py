@@ -25,7 +25,7 @@ def update_agent():
     formatted_date = current_date.strftime('%Y%m%d')
     # print(formatted_date)
     url = [
-        f'https://clashgithub.com/wp-content/uploads/rss/{formatted_date}.txt',
+        # f'https://clashgithub.com/wp-content/uploads/rss/{formatted_date}.txt',
         #    'https://freenode.me/wp-content/uploads/2024/03/0321.yaml',
         'https://tt.vg/freeclash',
         'https://raw.githubusercontent.com/aiboboxx/v2rayfree/main/v2',
@@ -34,14 +34,16 @@ def update_agent():
     for index, u in enumerate(url):
         log_console(u)
         try:
-            res = requests_cuff.get(u, impersonate='chrome104', headers=headers)
-        except curl_cffi.curl.CurlError as e:
+            res = requests.get(u, headers=headers)
+        except TimeoutError as e:
             print(u,'请求报错,需要获取的链接可能被墙了,设置代理重试:',e)
-            res = requests_cuff.get(u, impersonate='chrome104', headers=headers,verify=False,proxies={'http':'socks5://127.0.0.1:1089','https':'socks5://127.0.0.1:1089'})
+            res = requests.get(u, headers=headers,verify=False,proxies={'http':'http://127.0.0.1:1090','https':'http://127.0.0.1:1090'})
         except Exception as e:
             print_exc()
             continue
-        if res.status_code != 200: print(f'{u} 当前订阅地址无效返回:{res.status_code}')
+        if res.status_code != 200:
+            print(f'{u} 当前订阅地址无效返回:{res.status_code}')
+            continue
         path = f'merge/yaml_list/{index + 1}.yaml'
         with open(path, 'w', encoding='utf-8') as f:
             f.write(res.text)
