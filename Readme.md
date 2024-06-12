@@ -17,5 +17,5 @@
 >> - tool/proxy_check_tool.py可更换检测的api
 
 
-### 使用说明(https://www.whyyzs.top/python/299/)
+### [使用说明](https://www.whyyzs.top/python/299/)
 仅供学习使用。
