@@ -105,7 +105,7 @@ def check_no_queue(proxy_result):
             pass
             # proxy_result[proxy][0] += 1
         else:
-            proxy_result.update({proxy: {'count': 0, 'IpAddress': '暂无'}})
+            proxy_result.update({proxy: {'count': 0, 'IpAddress': ''}})
     with ThreadPoolExecutor(16) as pool:
         log_console(f'开始检测{len(proxy_result.keys())}个代理')
         for d in proxy_result:

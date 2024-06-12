@@ -14,8 +14,8 @@ from merge.merge_yaml import update_agent, merge_yaml
 app = Flask(__name__)
 proxys = ['socks5://192.168.1.190:1089'
           'socks5://192.168.1.190:10808',
-          'socks5://192.168.1.102:10808',
-          'socks5://192.168.1.131:10808', 'socks5://192.168.1.190:10810']
+          'socks5://192.168.1.170:10808',
+          'socks5://192.168.1.176:10808', 'socks5://192.168.1.190:10810']
 format_proxy_result = {x:{'count': 0, 'IpAddress': ''} for x in proxys}
 if not find_process('socks_pool_start.exe'):
     print('start pool--')
