@@ -16,4 +16,6 @@
 >> - 每天指定时间定时重新获取一次节点并重启内核
 >> - tool/proxy_check_tool.py可更换检测的api
 
+
+### 使用说明(https://www.whyyzs.top/python/299/)
 仅供学习使用。
