@@ -2,7 +2,7 @@ import re
 import time
 from sys import stdout
 from typing import Union, List, Dict
-from tool.get_port import find_udp_ports_in_range
+from tools.get_port import find_udp_ports_in_range
 import requests
 from lxml import etree
 from redis import Redis, ConnectionPool
@@ -14,8 +14,6 @@ head = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36",
     # "cookie":"EUID=e9716db7-1acb-4e52-aba8-8356497ba934; id_ab=AEG; mboxes=%7B%22header-sign-in%22%3A%7B%22variation%22%3A%22%231%22%2C%22enabled%22%3Afalse%7D%7D; __gads=ID=437ac4993291c005:T=1698129367:RT=1701161161:S=ALNI_MbSrZGcxWrFxfy7bM6fxFB4HHbBWA; mbox=session%23c5e7a1355e4b4eceb64f5d6ab77e067d%231701163024%7CPC%23884c7daad7a6491b80549f100ba59e64.34_0%231764405964; __cf_bm=hUVih04zP9pysHsj6CZfGvnpuWQaZxpyXoheonC0N5M-1701326317-0-Abj1de6lnkkbAiY3YG2U7d5bSkB2m0PmGkHjb3JNyupkHoTJ+194UEL+vjM+81WTG60t10oL4nN36Uk95i0LSK7Oj2rxVLfdmErW9FBx1AWf; cf_clearance=NkULiB.CvRmiCXSZfTb_j3mWrhzK.Idz66l5nOwtyaw-1701326324-0-1-dadd55.df54065b.57db82b5-0.2.1701326324; AMCVS_4D6368F454EC41940A4C98A6%40AdobeOrg=1; AMCV_4D6368F454EC41940A4C98A6%40AdobeOrg=179643557%7CMCIDTS%7C19692%7CMCMID%7C79880518574593793854008400437633522387%7CMCAAMLH-1701931127%7C7%7CMCAAMB-1701931127%7CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y%7CMCOPTOUT-1701333527s%7CNONE%7CMCAID%7CNONE%7CMCCIDH%7C-1660478464%7CvVersion%7C5.5.0; s_pers=%20v8%3D1701326327457%7C1795934327457%3B%20v8_s%3DLess%2520than%25207%2520days%7C1701328127457%3B%20c19%3Dsd%253Aerror%253Awafblocked%7C1701328127460%3B%20v68%3D1701326325183%7C1701328127462%3B; s_sess=%20e41%3D1%3B%20s_cpc%3D1%3B%20s_cc%3Dtrue%3B"
 }
-
-
 
 
 def log_console(info):

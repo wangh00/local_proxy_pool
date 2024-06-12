@@ -1,7 +1,7 @@
 import os
 import time
 import requests
-from tool.proxy_check_tool import check_no_queue
+from tools.proxy_check_tool import check_no_queue
 from flask import Flask, jsonify, request
 from apscheduler.triggers.interval import IntervalTrigger
 from apscheduler.schedulers.background import BackgroundScheduler

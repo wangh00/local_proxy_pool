@@ -3,10 +3,9 @@ import subprocess
 import time
 from sys import stdout
 from traceback import print_exc
-
-import curl_cffi
-import execjs
 import urllib.parse
+
+import yaml
 from curl_cffi import requests as requests_cuff
 import requests
 
@@ -47,7 +46,22 @@ def update_agent():
         path = f'merge/yaml_list/{index + 1}.yaml'
         with open(path, 'w', encoding='utf-8') as f:
             f.write(res.text)
-
+def check_yaml():
+    folder_path = 'merge/yaml_list'
+    path_list = []
+    for item in os.listdir(folder_path):
+        item_path = os.path.join(folder_path, item)
+        absolute_path = os.path.abspath(item_path)
+        path_list.append('\"' + absolute_path + '\"')
+        print(absolute_path)
+        with open(absolute_path,'r',encoding='utf-8') as f:
+            try:
+                yaml.safe_load(f.read())
+                print("YAML格式正确。")
+                # return True
+            except yaml.YAMLError as e:
+                print(f"YAML格式错误: {e}")
+                # return False
 
 def merge_yaml():
     process = subprocess.Popen(['subconverter_win64/subconverter/subconverter.exe'])
@@ -67,7 +81,6 @@ def merge_yaml():
     res = requests.get(url)
     with open(r'clash_proxy\before_conversion.txt', 'w', encoding='utf-8') as f:
         f.write(res.text)
-    print('Converting to yaml file')
     time.sleep(1)
     result = subprocess.run(['node', 'clash_proxy/format_conversion.js'], capture_output=True, text=True,
                             encoding='utf-8')
@@ -77,5 +90,6 @@ def merge_yaml():
 
 
 if __name__ == '__main__':
-    update_agent()
-    merge_yaml()
+    # update_agent()
+    # merge_yaml()
+    check_yaml()
