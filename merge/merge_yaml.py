@@ -33,11 +33,11 @@ def update_agent():
     for index, u in enumerate(url):
         log_console(u)
         try:
-            res = requests.get(u, headers=headers)
-        except TimeoutError as e:
+            res = requests.get(u, headers=headers,timeout=20)
+        except requests.exceptions.ConnectionError as e:
             print(u,'请求报错,需要获取的链接可能被墙了,设置代理重试:',e)
             res = requests.get(u, headers=headers,verify=False,proxies={'http':'http://127.0.0.1:1090','https':'http://127.0.0.1:1090'})
-        except Exception as e:
+        except Exception:
             print_exc()
             continue
         if res.status_code != 200:
